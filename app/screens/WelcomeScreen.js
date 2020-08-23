@@ -17,8 +17,12 @@ function WelcomeScreen(props) {
         />
         <Text style={styles.logoText}>Coffee Together</Text>
       </View>
-      <View style={styles.loginButton}></View>
-      <View style={styles.registerButton}></View>
+      <View style={styles.loginButton}>
+        <Text style={styles.buttonText}>Login</Text>
+      </View>
+      <View style={styles.registerButton}>
+        <Text style={styles.buttonText}>Register</Text>
+      </View>
     </ImageBackground>
   );
 }
@@ -29,6 +33,14 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
     backgroundColor: colors.background,
+  },
+  buttonText: {
+    fontSize: 30,
+    top: "30%",
+    textAlign: "center",
+    color: "white",
+    textShadowColor: colors.black,
+    textShadowRadius: 10,
   },
   loginButton: {
     width: "100%",
