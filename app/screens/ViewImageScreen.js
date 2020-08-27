@@ -1,17 +1,27 @@
 import React from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
+import Card from "../components/Card";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from "../config/colors";
 
 function ViewImageScreen(props) {
   return (
-    <View style={styles.container}>
-      <View style={styles.closeIcon}></View>
-      <View style={styles.deleteIcon}></View>
-      <Image
-        resizeMode="contain"
-        style={styles.image}
-        source={require("../assets/coffee-field")}
+    <View>
+      <View style={styles.closeIcon}>
+        <MaterialCommunityIcons name="close" color="black" size={35} />
+      </View>
+      <View style={styles.deleteIcon}>
+        <MaterialCommunityIcons
+          name="trash-can-outline"
+          color="black"
+          size={35}
+        />
+      </View>
+      <Card
+        title="coffee"
+        subTitle=",mmm coffee"
+        image={require("../assets/coffee-field.png")}
       />
     </View>
   );
@@ -19,9 +29,6 @@ function ViewImageScreen(props) {
 
 const styles = StyleSheet.create({
   closeIcon: {
-    width: 50,
-    height: 50,
-    backgroundColor: colors.secondary,
     position: "absolute",
     top: 40,
     left: 30,
@@ -31,9 +38,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   deleteIcon: {
-    width: 50,
-    height: 50,
-    backgroundColor: colors.primary,
     position: "absolute",
     top: 40,
     left: 30,
