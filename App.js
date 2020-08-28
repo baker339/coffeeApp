@@ -21,8 +21,8 @@ import AppPicker from "./app/components/AppPicker";
 
 const categories = [
   { label: "Coffee Beans", value: 1 },
-  { label: "Coffee Shop", value: 1 },
-  { label: "Drink Type", value: 1 },
+  { label: "Coffee Shop", value: 2 },
+  { label: "Drink Type", value: 3 },
 ];
 
 // View -> UIView
