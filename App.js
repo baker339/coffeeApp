@@ -18,6 +18,7 @@ import AccountScreen from "./app/screens/AccountsScreen";
 import ListingsScreen from "./app/screens/ListingsScreen";
 import AppTextInput from "./app/components/AppTextInput";
 import AppPicker from "./app/components/AppPicker";
+import LoginScreen from "./app/screens/LoginScreen";
 
 const categories = [
   { label: "Coffee Beans", value: 1 },
@@ -29,16 +30,5 @@ const categories = [
 export default function App() {
   const [category, setCategory] = useState();
 
-  return (
-    <Screen>
-      <AppPicker
-        selectedItem={category}
-        onSelectItem={(item) => setCategory(item)}
-        icon="apps"
-        placeholder="Category"
-        items={categories}
-      />
-      <AppTextInput icon="email" placeholder="email" />
-    </Screen>
-  );
+  return <LoginScreen />;
 }
