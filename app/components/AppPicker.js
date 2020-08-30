@@ -2,27 +2,33 @@ import React, { Component, useState } from "react";
 import {
   View,
   StyleSheet,
-  TextInput,
   TouchableWithoutFeedback,
   Modal,
   Button,
   FlatList,
-  PickerIOSItem,
+  Text,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import defaultStyles from "../config/styles";
-import AppText from "./AppText";
 import Screen from "../components/Screen";
 import PickerItem from "../components/PickerItem";
 
-function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
+function AppPicker({
+  icon,
+  items,
+  onSelectItem,
+  placeholder,
+  width = "100%",
+  selectedItem,
+  PickerItemComponent = PickerItem,
+}) {
   const [modalVisable, setModalVisable] = useState(false);
 
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisable(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, { width }]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -31,9 +37,11 @@ function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
               style={styles.icon}
             />
           )}
-          <AppText style={styles.text}>
-            {selectedItem ? selectedItem.label : placeholder}
-          </AppText>
+          {selectedItem ? (
+            <Text style={styles.text}>{selectedItem.label}</Text>
+          ) : (
+            <Text style={styles.placeholder}>{placeholder}</Text>
+          )}
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
@@ -50,7 +58,7 @@ function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
             data={items}
             keyExtractor={(item) => item.value.toString()}
             renderItem={({ item }) => (
-              <PickerItem
+              <PickerItemComponent
                 label={item.label}
                 onPress={() => {
                   setModalVisable(false);
@@ -70,13 +78,17 @@ const styles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.light,
     borderRadius: 25,
     flexDirection: "row",
-    width: "100%",
     padding: 15,
     marginVertical: 10,
     alignItems: "center",
   },
   icon: {
     margin: 10,
+  },
+  placeholder: {
+    flex: 1,
+    color: defaultStyles.colors.medium,
+    fontSize: 18,
   },
   text: {
     flex: 1,

@@ -7,24 +7,28 @@ import Screen from "../components/Screen";
 import { AppFormField, AppSubmitButton } from "../components/forms";
 
 const validationSchema = Yup.object().shape({
+  name: Yup.string().required().label("Name"),
   email: Yup.string().required().email().label("Email"),
   password: Yup.string().required().min(4).label("Password"),
 });
 
-function LoginScreen(props) {
+function RegisterScreen(props) {
   return (
     <Screen style={styles.container}>
-      <Image
-        source={require("../assets/coffee-beans.png")}
-        style={styles.logo}
-      />
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ name: "", email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
         {() => (
           <>
+            <AppFormField
+              name="name"
+              autoCapitalize="words"
+              autoCorrect={false}
+              icon="dog"
+              placeholder="Name"
+            />
             <AppFormField
               name="email"
               autoCapitalize="none"
@@ -64,4 +68,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default RegisterScreen;
