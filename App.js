@@ -1,7 +1,17 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { StyleSheet, Platform, TextInput, Text, Switch } from "react-native";
+import {
+  StyleSheet,
+  Platform,
+  TextInput,
+  Text,
+  Switch,
+  Button,
+  Image,
+} from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions";
 import {
   useDimensions,
   useDeviceOrientation,
@@ -21,16 +31,10 @@ import AppPicker from "./app/components/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
-
-const categories = [
-  { label: "Coffee Beans", value: 1 },
-  { label: "Coffee Shop", value: 2 },
-  { label: "Drink Type", value: 3 },
-];
+import ImageInput from "./app/components/ImageInput";
+import ImageInputList from "./app/components/ImageInputList";
 
 // View -> UIView
 export default function App() {
-  const [category, setCategory] = useState();
-
   return <ListingEditScreen />;
 }

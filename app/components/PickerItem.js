@@ -5,10 +5,10 @@ import ListItem from "./ListItem";
 
 import defaultStyles from "../config/styles";
 
-function PickerItem({ label, onPress }) {
+function PickerItem({ item, onPress }) {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
-      <Text style={[defaultStyles.text, styles.text]}>{label}</Text>
+      <Text style={[defaultStyles.text, styles.text]}>{item.label}</Text>
     </TouchableOpacity>
   );
 }
