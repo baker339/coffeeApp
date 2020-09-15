@@ -13,7 +13,7 @@ import {
 import colors from "../config/colors";
 import AppButton from "../components/AppButton";
 
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
   return (
     <ImageBackground
       style={styles.background}
@@ -29,8 +29,12 @@ function WelcomeScreen(props) {
         <Text style={styles.logoText}>Coffee Together</Text>
       </View>
       <View style={styles.buttonContiner}>
-        <AppButton title="login" onPress={() => alert("tapped")} />
-        <AppButton title="register" color="secondary" />
+        <AppButton title="login" onPress={() => navigation.navigate("Login")} />
+        <AppButton
+          title="register"
+          color="secondary"
+          onPress={() => navigation.navigate("Register")}
+        />
       </View>
     </ImageBackground>
   );
