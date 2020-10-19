@@ -1,25 +1,16 @@
-import { client } from "./client";
+import * as api from "./apiClient";
 
 const endpoint = "/listings";
 
-const getListings = () => {
-  return client.get(endpoint);
+const getListings = async () => {
+  return api.default.get(endpoint);
 };
 
-// const getListings = () => {
-//   fetch("http://192.168.1.251:7889/api/listings")
-//     .then((response) => response.json())
-//     .then((responseJson) => {
-//       setListings(responseJson);
-//     });
-//   return responseJson;
-// };
-
-const addListing = (listing) => {
+const addListing = (listing, onUploadProgress) => {
   const data = new FormData();
   data.append("title", listing.title);
   data.append("price", listing.price);
-  data.append("categoryid", listing.category.value);
+  data.append("categoryId", listing.category.value);
   data.append("description", listing.description);
 
   listing.images.forEach((image, index) =>
@@ -34,17 +25,10 @@ const addListing = (listing) => {
     data.append("location", JSON.stringify(listing.location));
   }
 
-  const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  };
-
-  return fetch("http://192.168.1.251:7889/api/listings", requestOptions);
-
-  /*
-    return client.post(endpoint, data)
-    */
+  return api.default.post(endpoint, data, {
+    onUploadProgress: (progress) =>
+      onUploadProgress(progress.loaded / progress.total),
+  });
 };
 
 export default {

@@ -5,16 +5,15 @@ export default useApi = (apiFunc) => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const request = async () => {
-    // const response = await listingsApi.getListings();
-    // setListings(response.data);
-    // console.log(response.data);
+  const request = async (...args) => {
     setLoading(true);
-    fetch(apiFunc)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setData(responseJson);
-      });
+    const response = await apiFunc(...args);
+
+    if (!response.ok) return setError(true);
+    //console.log(response);
+
+    setError(false);
+    setData(response.data);
     setLoading(false);
   };
 

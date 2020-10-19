@@ -6,43 +6,21 @@ import Card from "../components/Card";
 import colors from "../config/colors";
 import routes from "../navigation/routes";
 import listingsApi from "../api/listing";
-import { client } from "../api/client";
+import { apiClient } from "../api/apiClient";
 import AppText from "../components/AppText";
 import AppButton from "../components/AppButton";
 import ActivityIndicator from "../components/ActivityIndicator";
+import Firebase from "../api/firebase";
+import useApi from "../hooks/useApi";
 
 function ListingsScreen({ navigation }) {
-  const [listings, setListings] = useState([]);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const { data: listings, error, loading, request: loadListings } = useApi(
+    listingsApi.getListings
+  );
 
   useEffect(() => {
     loadListings();
   }, []);
-
-  const loadListings = async () => {
-    // const response = await listingsApi.getListings();
-    // setListings(response.data);
-    // console.log(response.data);
-    setLoading(true);
-    // fetch("http://192.168.1.251:7889/api/listings")
-    //   .then((response) => response.json())
-    //   .then((responseJson) => {
-    //     setListings(responseJson);
-    //   });
-    listingsApi.getListings();
-    setLoading(false);
-  };
-
-  const handleOnClick = () => {
-    // loadListings();
-    //const response2 = client.get("/listings").then((response2) => response2)
-    // fetch("http://192.168.1.251:7889/api/listings")
-    //   .then((response) => response.json())
-    //   .then((responseJson) => {
-    //     setListings(responseJson);
-    //   });
-  };
 
   return (
     <Screen style={styles.screen}>
@@ -52,8 +30,8 @@ function ListingsScreen({ navigation }) {
           <AppButton title="Retry" onClick={loadListings} />
         </>
       )}
-      <ActivityIndicator visible={true} />
-      {/* <FlatList
+      <ActivityIndicator visible={loading} />
+      <FlatList
         data={listings}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => (
@@ -64,7 +42,7 @@ function ListingsScreen({ navigation }) {
             onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}
-      /> */}
+      />
     </Screen>
   );
 }
